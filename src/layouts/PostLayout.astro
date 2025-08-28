@@ -111,6 +111,8 @@ const posts = await getSortedFilteredPosts()
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     z-index: 100;
+		font-size: var(--font-size-s);
+		text-transform: uppercase;
   }
 
   .post-index.mobile {
@@ -142,7 +144,6 @@ const posts = await getSortedFilteredPosts()
     text-decoration: none;
     transition: color 0.2s ease-out;
     display: block;
-    font-size: small;
   }
 
   .post-index-list a:hover {

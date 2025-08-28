@@ -12,9 +12,9 @@
   --serif: Besley, Baskerville, Georgia, Cambria, 'Times New Roman', Times, serif;
   --mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
-  --font-size-s: 0.8125rem;
-  --font-size-m: 0.9375rem;
-  --font-size-l: 1.0625rem;
+  --font-size-s: 0.5rem;
+  --font-size-m: 0.8rem;
+  --font-size-l: 1.2rem;
 
   --font-weight-light: 350;
   --font-weight-regular: 400;
@@ -109,6 +109,7 @@ body {
   font-family: var(--sans);
   font-feature-settings: 'ss03' 1;
   font-size: var(--font-size-m);
+	text-transform: uppercase;
   text-autospace: normal;
   text-rendering: optimizeLegibility;
   line-height: 1.75;

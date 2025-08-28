@@ -8,11 +8,13 @@
 /* Main content container */
 .prose {
   margin-bottom: 8rem;
+	text-transform: none;
 }
 
 /* Post title section */
 .prose .title {
   margin-bottom: 2.5em;
+	text-transform: uppercase;
 }
 
 .prose .title h1 {
