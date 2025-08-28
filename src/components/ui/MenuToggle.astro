@@ -1,0 +1,154 @@
+---
+import { themeConfig } from '@/config'
+---
+
+<button class="post-index-toggle" aria-label="Toggle post index">
+	<svg
+		class="menu-icon"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			d="M3 12h18M3 6h18M3 18h18"
+			stroke="currentColor"
+			stroke-width="1.25"
+			stroke-linecap="round"></path>
+	</svg>
+	<svg
+		class="close-icon"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			d="M18 6L6 18M6 6l12 12"
+			stroke="currentColor"
+			stroke-width="1.25"
+			stroke-linecap="round"
+			stroke-linejoin="round"></path>
+	</svg>
+</button>
+
+<style>
+	.post-index-toggle {
+		display: none;
+		position: fixed;
+		top: 10%;
+		right: 5%;
+		padding: 1rem;
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		cursor: pointer;
+		z-index: 101;
+		background-color: var(--bg);
+		color: var(--text-secondary);
+		transition: all 0.2s ease-out;
+	}
+
+  .post-index-toggle:hover {
+    background-color: var(--background-tertiary);
+    color: var(--text-primary);
+    transform: scale(1.05);
+		background-color: color-mix(in srgb, var(--bg) 0%, var(--text-primary) 5%);
+  }
+
+  .post-index-toggle svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease-out;
+  }
+
+  .post-index-toggle .close-icon {
+    opacity: 0;
+  }
+
+  .post-index-toggle.open .menu-icon {
+    opacity: 0;
+  }
+
+  .post-index-toggle.open .close-icon {
+    opacity: 1;
+  }
+
+  .post-index-toggle svg path {
+    stroke-width: 1.25;
+  }
+
+	@media (max-width: 768px) {
+    .post-index-toggle {
+      display: block;
+    }
+</style>
+
+<script is:inline define:vars={{
+    contentWidth: themeConfig.general.contentWidth,
+    centeredLayout: themeConfig.general.centeredLayout,
+    toc: themeConfig.post.toc
+  }}>
+  ;(function () {
+    function adjustPostIndexPosition() {
+      const postIndex = document.querySelector('.post-index')
+      const toggle = document.querySelector('.post-index-toggle')
+      if (!postIndex || !toggle) return
+
+      // Calculate available margin space for positioning, similar to back button
+      const pageWidth = window.innerWidth
+      const contentWidthValue = parseFloat(contentWidth)
+      const widthValue = Math.min(contentWidthValue, 50)
+      const shouldUseCustomWidth = widthValue > 25
+      const finalWidthValue = shouldUseCustomWidth ? widthValue : 25
+      const margin = (pageWidth - finalWidthValue * 16) / 2
+      const baseMinSpace = 15 * 16 // Base minimum space needed for post index
+
+      // Switch to mobile view if there's not enough space
+      if (margin < baseMinSpace || pageWidth <= 768) {
+        postIndex.classList.add('mobile')
+        toggle.style.display = 'block'
+      } else {
+        postIndex.classList.remove('mobile', 'open')
+        toggle.style.display = 'none'
+        // Position the post index similar to back button
+        const leftPosition = margin - baseMinSpace
+        postIndex.style.left = `${leftPosition}px`
+      }
+    }
+
+    // Toggle mobile menu
+    function setupToggle() {
+      const toggle = document.querySelector('.post-index-toggle')
+      const postIndex = document.querySelector('.post-index')
+      if (!toggle || !postIndex) return
+
+      toggle.addEventListener('click', () => {
+        postIndex.classList.toggle('open')
+        toggle.classList.toggle('open')
+      })
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!postIndex.contains(e.target) && !toggle.contains(e.target)) {
+          postIndex.classList.remove('open')
+          toggle.classList.remove('open')
+        }
+      })
+    }
+
+    function init() {
+      adjustPostIndexPosition()
+      setupToggle()
+    }
+
+    document.addEventListener('astro:page-load', init)
+    window.addEventListener('resize', adjustPostIndexPosition)
+  })();
+</script>
