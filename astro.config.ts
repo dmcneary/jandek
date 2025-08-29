@@ -17,13 +17,15 @@ import path from 'path'
 import cloudflare from '@astrojs/cloudflare'
 
 export default defineConfig({
-  adapter: cloudflare(), // Set adapter for deployment, or set `linkCard` to `false` in `src/config.ts`
+  adapter: cloudflare({
+		imageService: "compile"
+	}), // Set adapter for deployment, or set `linkCard` to `false` in `src/config.ts`
   site: themeConfig.site.website,
   image: {
     service: {
       entrypoint: 'astro/assets/services/sharp',
       config: imageConfig
-    }
+    },
   },
   markdown: {
     shikiConfig: {
