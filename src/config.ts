@@ -4,9 +4,9 @@ export const themeConfig: ThemeConfig = {
   // SITE INFO ///////////////////////////////////////////////////////////////////////////////////////////
   site: {
     website: 'https://putmydreamonthispla.net/', // Site domain
-    title: 'Jandek Blog', // Site title
+    title: 'Put My Dream On This Planet', // Site title
     author: 'Miguel', // Author name
-    description: 'A blog about Jandek', // Site description
+    description: 'jandek’s greatest hits', // Site description
     language: 'en-US' // Default language
   },
 

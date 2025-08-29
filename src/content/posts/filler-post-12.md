@@ -1,5 +1,5 @@
 ---
-title: "Filler Post 12"
+title: "Lorem Ipsum"
 pubDate: "2024-06-01"
 ---
 
