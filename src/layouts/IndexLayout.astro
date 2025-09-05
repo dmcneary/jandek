@@ -14,7 +14,7 @@ const { title, description } = Astro.props
   <BaseHead title={title} description={description} slot="head" />
   <div class="page-content">
     <GradientMask />
-    <div>
+    <div class="header-container">
       <Header />
     </div>
     <main>
@@ -40,4 +40,8 @@ const { title, description } = Astro.props
   .page-content main {
     flex: 1;
   }
+
+	.header-container {
+		border-bottom: 0.8rem double var(--border);
+	}
 </style>
