@@ -8,6 +8,7 @@ import BaseHead from '@/components/layout/BaseHead.astro'
 import Footer from '@/components/layout/Footer.astro'
 import BackButton from '@/components/ui/BackButton.astro'
 import MenuToggle from '@/components/ui/MenuToggle.astro'
+import PostIndex from '@/components/ui/PostIndex.astro'
 import TableOfContents from '@/components/ui/TableOfContents.astro'
 import GradientMask from '@/components/ui/GradientMask.astro'
 import ImageOptimizer from '@/components/ui/ImageOptimizer.astro'
@@ -44,17 +45,7 @@ const posts = await getSortedFilteredPosts()
         <GradientMask />
         <BackButton />
 				<MenuToggle />
-        <div class="post-index" aria-label="Post Index">
-          <ul class="post-index-list">
-            {
-              posts.slice(0, 10).map((post) => (
-                <li>
-                  <a href={`/${post.id}/`}>{post.data.title}</a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+				<PostIndex posts={posts} />
         {themeConfig.post.toc && <TableOfContents toc={toc} />}
         <div class="title">
           <h1>{title}</h1>
@@ -97,80 +88,7 @@ const posts = await getSortedFilteredPosts()
   .post-container main {
     flex: 1;
   }
-
-  .post-index {
-    position: fixed;
-    top: 10rem;
-    width: 200px;
-    max-height: calc(100vh - 8rem);
-    overflow-y: auto;
-    padding: 1rem;
-    background-color: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    z-index: 100;
-		font-size: var(--font-size-s);
-		text-transform: uppercase;
-  }
-
-  .post-index.mobile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .post-index-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    list-style-type: none;
-  }
-
-  .post-index-list li {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .post-index-list li::before {
-    display: none;
-  }
-
-  .post-index-list a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.2s ease-out;
-    display: block;
-  }
-
-  .post-index-list a:hover {
-    color: var(--text-primary);
-  }
-
-  .post-index.mobile {
-    transform: translateX(100%);
-    right: 0;
-    left: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-    height: max-content;
-    max-height: 100vh;
-    width: fit-content;
-    max-width: 80vw;
-    border-radius: 8px 0 0 8px;
-    background-color: var(--bg);
-    backdrop-filter: blur(8px);
-  }
-
-  .post-index.mobile.open {
-    transform: translateX(0);
-  }
-
-  
-
+	
   @media (max-width: 768px) {
     .post-index-toggle {
       display: block;

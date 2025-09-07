@@ -114,6 +114,7 @@ import { themeConfig } from '@/config'
       if (margin < baseMinSpace || pageWidth <= 768) {
         postIndex.classList.add('mobile')
         toggle.style.display = 'block'
+				postIndex.style.left = ''
       } else {
         postIndex.classList.remove('mobile', 'open')
         toggle.style.display = 'none'
